@@ -3,11 +3,12 @@ import ProductCard from "./component/ProductCard";
 import Button from "./component/UI/Button";
 import Input from "./component/UI/Input";
 import MyModal from "./component/UI/Modal";
-import { formInputList, productList } from "./data"
+import { colors, formInputList, productList } from "./data"
 import { ChangeEvent,  FormEvent,  useState } from 'react'
 import { Iproduct } from "./interfaces";
 import { productValidation } from "./validation";
 import ErrorMsg from "./component/ErrorMsg";
+import CircleColor from "./component/CircleColor";
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
     imageUrl:'',
     price:''
   })
+  const[tempColor,serTempColor]=useState<string[]>([])
   let [isOpen, setIsOpen] = useState(false)
 
   function open() {
@@ -38,6 +40,7 @@ const App = () => {
   function close() {
     setIsOpen(false)
   }
+  console.log(tempColor);
   const onGhangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
     const{name,value}=e.target
     setProduct({
@@ -57,6 +60,16 @@ const App = () => {
       <ErrorMsg msg={errors[input.name]}/>
     </div>
   )
+  const renderColor=colors.map(color=>(
+    <CircleColor key={color} color={color} 
+    onClick={()=>{
+      if (tempColor.includes(color)) {
+        serTempColor(prev=>prev.filter(item=>item!==color))
+        return
+      }
+      serTempColor((prev)=>[...prev,color])
+    }}/>
+  ))
   const submitHandler=(event: FormEvent<HTMLFormElement>): void =>{
     event.preventDefault()
     const errors=productValidation({
@@ -84,13 +97,21 @@ const App = () => {
 
   return (
     <main className="container mx-auto">
-      <Button className="bg-indigo-700" width="w-fit" onClick={open}>ADD</Button>
+      <Button className= "bg-indigo-700 hover:bg-indigo-800 block mx-auto my-10 px-10" width="w-fit" onClick={open}>Build product</Button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 p-2 m-5 rounded-md">
         {renderProductList}
       </div>
       <MyModal isOpen={isOpen} close={close} title="Add a new product">
         <form className="space-y-3" onSubmit={submitHandler}>
           {renderFormInputList}
+          <div className="flex items-center flex-wrap space-x-1">
+            {renderColor}
+          </div>
+          <div className="flex items-center flex-wrap space-x-1">
+            {tempColor.map((color)=>(
+              <span key={color} className="p-1 rounded-md text-white mb-1" style={{backgroundColor:color}}>{color}</span>
+            ))}
+          </div>
           <div className="flex items-center space-x-3">
             <Button className="bg-indigo-700" width="w-full">Submit</Button>
             <Button className="bg-gray-400" width="w-full" onClick={onCancel}  >Cancel</Button>

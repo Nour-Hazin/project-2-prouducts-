@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { IFormInput, Iproduct } from "../interfaces";
+import { IFormInput, Icategory, Iproduct } from "../interfaces";
 
 export const productList: Iproduct[] = [
     {
@@ -91,4 +91,67 @@ export const colors :string[]= [
     "#645CBB" 
     ,"#1F8A70", 
     "#820008" ,
-    "#FF0032"]
+    "#FF0032"
+];
+export const categories:Icategory[] = [
+    {
+        id: uuid(),
+        name: 'Wade Cooper',
+        imageUrl:
+            'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Arlene Mccoy',
+        imageUrl:
+            'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Devon Webb',
+        imageUrl:
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Tom Cook',
+        imageUrl:
+            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Tanya Fox',
+        imageUrl:
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Hellen Schmidt',
+        imageUrl:
+            'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Caroline Schultz',
+        imageUrl:
+            'https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Mason Heaney',
+        imageUrl:
+            'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Claudie Smitham',
+        imageUrl:
+            'https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+        id: uuid(),
+        name: 'Emil Schaefer',
+        imageUrl:
+            'https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+]

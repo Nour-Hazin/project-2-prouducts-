@@ -3,13 +3,14 @@ import ProductCard from "./component/ProductCard";
 import Button from "./component/UI/Button";
 import Input from "./component/UI/Input";
 import MyModal from "./component/UI/Modal";
-import { colors, formInputList, productList } from "./data"
+import { categories, colors, formInputList, productList } from "./data"
 import { ChangeEvent,  FormEvent,  useState } from 'react'
 import { Iproduct } from "./interfaces";
 import { productValidation } from "./validation";
 import ErrorMsg from "./component/ErrorMsg";
 import CircleColor from "./component/CircleColor";
-
+import { v4 as uuid } from "uuid";
+import Select from "./component/UI/Select";
 
 const App = () => {
   const defaultProductObj={
@@ -23,15 +24,18 @@ const App = () => {
       imageUrl:''
     }
   }
+  const[products,setProducts]=useState<Iproduct[]>(productList)
   const[product,setProduct]=useState<Iproduct>(defaultProductObj)
-  const[errors,setErrors]=useState({
+  const[errors,setErrors]=useState({ 
     title:'',
     description:'',
     imageUrl:'',
     price:''
   })
   const[tempColor,serTempColor]=useState<string[]>([])
-  let [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [selected, setSelected] = useState(categories[0])
+
 
   function open() {
     setIsOpen(true)
@@ -52,7 +56,7 @@ const App = () => {
       [name]:""
     })
   }
-  const renderProductList = productList.map(product => <ProductCard key={product.id} product={product} />)
+  const renderProductList = products.map(product => <ProductCard key={product.id} product={product} />)
   const renderFormInputList = formInputList.map(input =>
     <div className=" flex flex-col  " key={input.id}>
       <label htmlFor={input.id} className="mb-2">{input.label}</label>
@@ -85,7 +89,10 @@ const App = () => {
         return
       }
       else{
-        console.log('successed');
+        setProducts(prev=>[{...product,id:uuid(),colors:tempColor,category:selected},...prev])
+        setProduct(defaultProductObj)
+        serTempColor([])
+        close ()
       }
 }
 
@@ -104,7 +111,8 @@ const App = () => {
       <MyModal isOpen={isOpen} close={close} title="Add a new product">
         <form className="space-y-3" onSubmit={submitHandler}>
           {renderFormInputList}
-          <div className="flex items-center flex-wrap space-x-1">
+          <Select selected={selected} setSelected={setSelected}/>
+          <div className="flex items-center flex-wrap space-x-1 mt-1">
             {renderColor}
           </div>
           <div className="flex items-center flex-wrap space-x-1">
